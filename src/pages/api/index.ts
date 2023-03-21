@@ -25,13 +25,6 @@ export async function createContext(): Promise<GraphQLContext> {
   };
 }
 
-export const config = {
-  api: {
-    // Disable body parsing (required for file uploads)
-    bodyParser: false,
-  },
-};
-
 const typeDefs = readFileSync(join(process.cwd(), 'schema.graphql'), {
   encoding: 'utf-8',
 });
@@ -42,6 +35,8 @@ const resolvers: Resolvers = {
       return findOrCreateCart(prisma, id);
     },
   },
+  // 以下のCart, CartItemはQueryのcartの中身をオブジェクトでネストした中身になる
+  // graphql-yoga-serverにprismawを注入することで
   Cart: {
     items: async ({ id }, _, { prisma }) => {
       const items = await prisma.cart

@@ -1,3 +1,5 @@
+# typeで宣言したらtypeDefで操作することができるっぽい
+# schema.graphqlにクエリを追加してnpm run codegenするとresolver-types.tsが更新される
 type Query {
   cart(id: ID!): Cart
 }
@@ -31,6 +33,7 @@ type Mutation {
   decreaseCartItem(input: DecreaseCartItemInput!): Cart
 }
 
+# inputはparamsのことを指しているか
 input AddToCartInput {
   cartId: ID!
   id: ID!
