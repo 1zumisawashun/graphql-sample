@@ -1,5 +1,13 @@
 # Next.js 開発のテンプレート
 
+テンプレートは以下を参考にした
+
+https://zenn.dev/taichifukumoto/articles/setup-next-12-typescript-tailwind-tamplate
+
+Route API を用いた graphql は以下を参考にした
+
+https://github.com/vercel/next.js/tree/canary/examples/api-routes-graphql
+
 Next.js の開発はこのテンプレートをベースに行ってください。
 
 ## 環境
