@@ -10,6 +10,8 @@ https://github.com/vercel/next.js/tree/canary/examples/api-routes-graphql
 
 Next.js の開発はこのテンプレートをベースに行ってください。
 
+ステップ1:schema.graphqlにクエリを追加してnpm run codegenするとtypes.tsが更新される
+
 ## 環境
 
 `package.json` を参照ください。

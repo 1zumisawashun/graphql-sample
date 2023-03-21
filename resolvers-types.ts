@@ -55,10 +55,15 @@ export type Money = {
 export type Mutation = {
   __typename?: 'Mutation';
   addItem?: Maybe<Cart>;
+  removeItem?: Maybe<Cart>;
 };
 
 export type MutationAddItemArgs = {
   input: AddToCartInput;
+};
+
+export type MutationRemoveItemArgs = {
+  input: RemoveFromCartInput;
 };
 
 export type Query = {
@@ -67,6 +72,11 @@ export type Query = {
 };
 
 export type QueryCartArgs = {
+  id: Scalars['ID'];
+};
+
+export type RemoveFromCartInput = {
+  cartId: Scalars['ID'];
   id: Scalars['ID'];
 };
 
@@ -163,6 +173,7 @@ export type ResolversTypes = {
   Money: ResolverTypeWrapper<Money>;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
+  RemoveFromCartInput: RemoveFromCartInput;
   String: ResolverTypeWrapper<Scalars['String']>;
 };
 
@@ -177,6 +188,7 @@ export type ResolversParentTypes = {
   Money: Money;
   Mutation: {};
   Query: {};
+  RemoveFromCartInput: RemoveFromCartInput;
   String: Scalars['String'];
 };
 
@@ -223,6 +235,12 @@ export type MutationResolvers<
     ParentType,
     ContextType,
     RequireFields<MutationAddItemArgs, 'input'>
+  >;
+  removeItem?: Resolver<
+    Maybe<ResolversTypes['Cart']>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationRemoveItemArgs, 'input'>
   >;
 };
 

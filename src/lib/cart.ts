@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 
-export async function findOrCreateCart(prisma: PrismaClient, id: string) {
+export const findOrCreateCart = async (prisma: PrismaClient, id: string) => {
   let cart = await prisma.cart.findUnique({
     where: { id },
   });
@@ -10,4 +10,4 @@ export async function findOrCreateCart(prisma: PrismaClient, id: string) {
     });
   }
   return cart;
-}
+};
