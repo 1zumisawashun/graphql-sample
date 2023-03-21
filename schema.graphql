@@ -1,5 +1,3 @@
-
-
 type Query {
   cart(id: ID!): Cart
 }
@@ -29,6 +27,8 @@ type CartItem {
 type Mutation {
   addItem(input: AddToCartInput!): Cart
   removeItem(input: RemoveFromCartInput!): Cart
+  increaseCartItem(input: IncreaseCartItemInput!): Cart
+  decreaseCartItem(input: DecreaseCartItemInput!): Cart
 }
 
 input AddToCartInput {
@@ -42,6 +42,16 @@ input AddToCartInput {
 }
 
 input RemoveFromCartInput {
+  id: ID!
+  cartId: ID!
+}
+
+input IncreaseCartItemInput {
+  id: ID!
+  cartId: ID!
+}
+
+input DecreaseCartItemInput {
   id: ID!
   cartId: ID!
 }

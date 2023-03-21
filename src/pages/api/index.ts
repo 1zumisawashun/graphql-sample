@@ -36,7 +36,6 @@ const typeDefs = readFileSync(join(process.cwd(), 'schema.graphql'), {
   encoding: 'utf-8',
 });
 
-/*eslint-disable @typescript-eslint/restrict-plus-operands*/
 const resolvers: Resolvers = {
   Query: {
     cart: async (_, { id }, { prisma }) => {
@@ -129,6 +128,48 @@ const resolvers: Resolvers = {
           cartId: true,
         },
       });
+      return findOrCreateCart(prisma, cartId);
+    },
+    increaseCartItem: async (_, { input }, { prisma }) => {
+      const { cartId, quantity } = await prisma.cartItem.update({
+        data: {
+          quantity: {
+            increment: 1,
+          },
+        },
+        where: { id_cartId: { id: input.id, cartId: input.cartId } },
+        select: {
+          quantity: true,
+          cartId: true,
+        },
+      });
+      return findOrCreateCart(prisma, cartId);
+    },
+    decreaseCartItem: async (_, { input }, { prisma }) => {
+      const { cartId, quantity } = await prisma.cartItem.update({
+        data: {
+          quantity: {
+            decrement: 1,
+          },
+        },
+        where: { id_cartId: { id: input.id, cartId: input.cartId } },
+        select: {
+          quantity: true,
+          cartId: true,
+        },
+      });
+
+      if (quantity <= 0) {
+        await prisma.cartItem.delete({
+          where: {
+            id_cartId: {
+              id: input.id,
+              cartId: input.cartId,
+            },
+          },
+        });
+      }
+
       return findOrCreateCart(prisma, cartId);
     },
   },
